@@ -64,7 +64,7 @@ body {
 /* HERO                      */
 /* ========================= */
 .home-wrapper {
-  height: 250vh;
+  height: 150vh;
   position: relative;
   z-index: 1;
 }
@@ -1890,12 +1890,11 @@ body {
 /* Disable / reset GSAP transforms on small screens */
 @media (max-width: 768px) {
   .home-wrapper {
-    height: auto !important;
+    height: 150vh; /* Matches the zoom duration */
   }
 
   .home {
-    position: relative !important;
-    height: auto !important;
+    /* Inherits fixed position from global styles */
   }
 
   .hero {
@@ -1909,9 +1908,9 @@ body {
     margin-bottom: 40px;
   }
 
+  /* Allowing GSAP to handle transforms on mobile */
   .hero .left,
   .hero .right img {
-    transform: none !important;
-    opacity: 1 !important;
+    will-change: transform, opacity;
   }
 }

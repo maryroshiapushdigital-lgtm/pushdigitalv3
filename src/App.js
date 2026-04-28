@@ -106,7 +106,7 @@ function App() {
     gsap.registerPlugin(ScrollTrigger);
     const mm = gsap.matchMedia();
 
-    mm.add("(min-width: 481px)", () => {
+    mm.add("(min-width: 0px)", () => {
       const getFullscreenTransform = () => {
         const img = document.querySelector(".hero .right img");
         if (!img) return { x: 0, y: 0, scale: 1 };
@@ -130,7 +130,7 @@ function App() {
         scrollTrigger: {
           trigger: ".home-wrapper",
           start: "top top",
-          end: "+=150%",
+          end: "bottom top",
           scrub: 1.2,
           invalidateOnRefresh: true,
         },
@@ -144,6 +144,24 @@ function App() {
         ease: "power2.inOut",
         duration: 1
       }, 0);
+
+      // Reveal animations for elements with .reveal class
+      gsap.utils.toArray(".reveal").forEach((el) => {
+        gsap.fromTo(el, 
+          { opacity: 0, y: 50 },
+          { 
+            opacity: 1, 
+            y: 0, 
+            duration: 1, 
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: el,
+              start: "top 85%",
+              toggleActions: "play none none none"
+            }
+          }
+        );
+      });
 
       return () => heroTl.kill();
     });
